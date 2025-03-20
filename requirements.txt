@@ -1,0 +1,27 @@
+# Web scraping and requests
+beautifulsoup4
+requests
+GoogleNews
+newspaper3k
+lxml
+lxml_html_clean
+
+# NLP and sentiment analysis
+nltk
+transformers
+torch
+
+# Text to Speech
+gTTS
+indic-transliteration
+googletrans
+
+# Web framework
+streamlit
+fastapi
+uvicorn
+pydantic
+altair
+
+# Data processing
+pandas
