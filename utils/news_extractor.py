@@ -1,6 +1,5 @@
-"""
-News extraction module for fetching and processing company news articles.
-"""
+"""News extraction module for fetching and processing company news articles."""
+
 import re
 import logging
 import requests
@@ -13,11 +12,14 @@ from newspaper import Article, Config
 REQUEST_TIMEOUT = 15
 MIN_CONTENT_LENGTH = 500
 MIN_ARTICLE_TEXT_LENGTH = 200
-USER_AGENT = ('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
-              '(KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36')
+USER_AGENT = (
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
+    '(KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+)
 
 # Set up logging
 logger = logging.getLogger(__name__)
+
 
 class NewsExtractor:
     """Class for extracting news articles about companies."""
@@ -31,8 +33,7 @@ class NewsExtractor:
         self.config.request_timeout = REQUEST_TIMEOUT
         
     def search_news(self, company_name: str, max_results: int = 30) -> List[Dict]:
-        """
-        Search for news articles related to the company using GoogleNews.
+        """Search for news articles related to the company using GoogleNews.
         
         Args:
             company_name: Name of the company to search for
@@ -52,7 +53,9 @@ class NewsExtractor:
                 self.googlenews.get_page(2)
                 result.extend(self.googlenews.result())
             
-            logger.info(f"Found {len(result)} news articles for {company_name}")
+            logger.info(
+                f"Found {len(result)} news articles for {company_name}"
+            )
             # Return more than needed to account for failed scrapes
             return result[:max_results]
         except Exception as e:
@@ -60,8 +63,7 @@ class NewsExtractor:
             return []
     
     def _clean_url(self, url: str) -> str:
-        """
-        Clean Google News URLs by removing tracking parameters.
+        """Clean Google News URLs by removing tracking parameters.
         
         Args:
             url: URL to clean
@@ -79,8 +81,7 @@ class NewsExtractor:
         return clean_url
     
     def extract_article_content(self, url: str) -> Dict[str, Any]:
-        """
-        Extract article content using newspaper3k and BeautifulSoup.
+        """Extract article content using newspaper3k and BeautifulSoup.
         
         Args:
             url: URL of the article
@@ -112,7 +113,8 @@ class NewsExtractor:
             # If page seems empty or has very little text content
             if len(main_text.strip()) < MIN_CONTENT_LENGTH:
                 logger.warning(
-                    f"URL appears to be JavaScript-heavy or has minimal content: {url}"
+                    f"URL appears to be JavaScript-heavy or has minimal "
+                    f"content: {url}"
                 )
                 return None
             
@@ -130,7 +132,9 @@ class NewsExtractor:
             try:
                 article.nlp()
             except Exception as nlp_err:
-                logger.warning(f"Error running NLP on article from {url}: {nlp_err}")
+                logger.warning(
+                    f"Error running NLP on article from {url}: {nlp_err}"
+                )
                 # Create a basic summary if NLP fails
                 if article.text:
                     summary = article.text[:500] + "..."
@@ -159,8 +163,7 @@ class NewsExtractor:
             return None
     
     def _extract_source_from_url(self, url: str) -> str:
-        """
-        Extract the source name from URL.
+        """Extract the source name from URL.
         
         Args:
             url: URL to extract source from
@@ -182,8 +185,7 @@ class NewsExtractor:
     def get_articles_for_company(
         self, company_name: str, min_articles: int = 10
     ) -> List[Dict]:
-        """
-        Get articles for a company with complete content extraction.
+        """Get articles for a company with complete content extraction.
         
         Args:
             company_name: Name of the company
@@ -214,7 +216,8 @@ class NewsExtractor:
                 articles.append(article_content)
         
         logger.info(
-            f"Successfully extracted {len(articles)} articles for {company_name}"
+            f"Successfully extracted {len(articles)} articles for "
+            f"{company_name}"
         )
         # Return all successful articles, even if fewer than requested
         return articles
