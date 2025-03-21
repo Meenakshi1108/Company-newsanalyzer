@@ -10,18 +10,27 @@ lxml_html_clean
 nltk
 transformers
 torch
+sentencepiece
 
 # Text to Speech
 gTTS
 indic-transliteration
 googletrans
+pydub
 
 # Web framework
 streamlit
 fastapi
-uvicorn
+uvicorn[standard]
 pydantic
 altair
 
 # Data processing
 pandas
+numpy
+
+# Utilities
+python-multipart
+aiofiles
+# Optional - Audio Processing
+# ffmpeg required for audio chunking (system dependency)
