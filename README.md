@@ -8,24 +8,24 @@ This project is a **Company News Analyzer** that extracts, summarizes, and analy
 
 ## Table of Contents
 
-- Project Setup
-  - Backend (FastAPI)
-  - Frontend (Streamlit)
-  - Virtual Environment
-- Code Architecture
-  - Modular Structure
-- Model Details
-  - Summarization
-  - Sentiment Analysis
-  - Text-to-Speech (TTS)
-- API Development
-- API Usage
-  - Third-Party APIs
-- Deployment
-  - Hugging Face Spaces Deployment
-- Assumptions & Limitations
-  - Assumptions
-  - Limitations
+- [Project Setup](#project-setup)
+  - [Backend (FastAPI)](#backend-fastapi)
+  - [Frontend (Streamlit)](#frontend-streamlit)
+  - [Virtual Environment](#virtual-environment)
+- [Code Architecture](#code-architecture)
+  - [Modular Structure](#modular-structure)
+- [Model Details](#model-details)
+  - [Summarization](#summarization)
+  - [Sentiment Analysis](#sentiment-analysis)
+  - [Text-to-Speech (TTS)](#text-to-speech-tts)
+- [API Development](#api-development)
+- [API Usage](#api-usage)
+  - [Third-Party APIs](#third-party-apis)
+- [Deployment](#deployment)
+  - [Hugging Face Spaces Deployment](#hugging-face-spaces-deployment)
+- [Assumptions & Limitations](#assumptions--limitations)
+  - [Assumptions](#assumptions)
+  - [Limitations](#limitations)
 
 ---
 
