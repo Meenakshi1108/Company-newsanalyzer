@@ -47,10 +47,8 @@ class TextToSpeechHindi:
             if not text:
                 return ""
                 
-            # For short texts, try a simpler approach first
             if len(text) < 1000:
                 try:
-                    # Use alternative translation approach for shorter texts
                     from googletrans import Translator as SyncTranslator
                     sync_translator = SyncTranslator()
                     result = sync_translator.translate(text, src='en', dest='hi')
