@@ -44,51 +44,33 @@ def get_audio_player(audio_file):
 
 st.markdown("""
 <style>
-    /* Existing styles... */
-    
-    /* Enhanced dark mode compatibility */
-    .stApp.stApp--darkTheme .insight-card {
-        background-color: #1e1e1e !important;
-        border: 1px solid #333 !important;
+    .main-header {
+        font-size: 2.5rem !important;
+        color: #1E88E5;
+        text-align: center;
+        margin-bottom: 1rem;
     }
-    
-    .stApp.stApp--darkTheme .insight-card p {
-        color: #fff !important;
+    .sub-header {
+        font-size: 1.5rem;
+        color: #424242;
+        margin-top: 2rem;
     }
-    
-    .stApp.stApp--darkTheme .summary-box {
-        background-color: #162c40 !important;
-        border-left: 5px solid #2196F3 !important;
+    .card {
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        background-color: #f9f9f9;
+        box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+        margin: 1rem 0;
     }
-    
-    .stApp.stApp--darkTheme .summary-box p, 
-    .stApp.stApp--darkTheme .summary-box h4 {
-        color: #fff !important;
+    .highlight-text {
+        color: #1E88E5;
+        font-weight: bold;
     }
-    
-    .stApp.stApp--darkTheme .topic-pill {
-        background-color: #162c40 !important;
-        color: #fff !important;
-    }
-    
-    /* Fix for article cards in dark mode */
-    .stApp.stApp--darkTheme [style*="border:1px solid #e0e0e0"] {
-        border: 1px solid #333 !important;
-        background-color: #1e1e1e !important;
-    }
-    
-    .stApp.stApp--darkTheme [style*="border:1px solid #e0e0e0"] h4,
-    .stApp.stApp--darkTheme [style*="border:1px solid #e0e0e0"] p:not([style*="background-color"]) {
-        color: #fff !important;
-    }
-    
-    /* Fix for no-audio placeholder */
-    .stApp.stApp--darkTheme [style*="background-color:#f5f5f5"] {
-        background-color: #1e1e1e !important;
-    }
-    
-    .stApp.stApp--darkTheme [style*="background-color:#f5f5f5"] p {
-        color: #ddd !important;
+    .footer-text {
+        text-align: center;
+        color: #616161;
+        font-size: 0.8rem;
+        margin-top: 2rem;
     }
 </style>
 """, unsafe_allow_html=True)
