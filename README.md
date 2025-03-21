@@ -1,42 +1,57 @@
-
----
-
 # Company News Analyzer
 
 This project is a **Company News Analyzer** that extracts, summarizes, and analyzes news articles about a specified company. It provides sentiment analysis, topic extraction, and a Hindi audio summary of the news. The backend is built with **FastAPI**, and the frontend is a **Streamlit** web application.
+
+**Live Demo**: [View the application on Hugging Face Spaces](https://huggingface.co/spaces/toph1108/Company_news_analyzer)
 
 ---
 
 ## Table of Contents
 
-- [Project Setup](#project-setup)
-  - [Backend (FastAPI)](#backend-fastapi)
-  - [Frontend (Streamlit)](#frontend-streamlit)
-- [Model Details](#model-details)
-  - [Summarization](#summarization)
-  - [Sentiment Analysis](#sentiment-analysis)
-  - [Text-to-Speech (TTS)](#text-to-speech-tts)
-- [API Development](#api-development)
-- [API Usage](#api-usage)
-  - [Third-Party APIs](#third-party-apis)
-- [Assumptions & Limitations](#assumptions--limitations)
-  - [Assumptions](#assumptions)
-  - [Limitations](#limitations)
+- Project Setup
+  - Backend (FastAPI)
+  - Frontend (Streamlit)
+  - Virtual Environment
+- Code Architecture
+  - Modular Structure
+- Model Details
+  - Summarization
+  - Sentiment Analysis
+  - Text-to-Speech (TTS)
+- API Development
+- API Usage
+  - Third-Party APIs
+- Deployment
+  - Hugging Face Spaces Deployment
+- Assumptions & Limitations
+  - Assumptions
+  - Limitations
 
 ---
 
 ## Project Setup
 
+### Virtual Environment
+
+1. **Create a virtual environment**:
+   ```bash
+   # Windows
+   python -m venv venv
+   venv\Scripts\activate
+
+   # macOS/Linux
+   python -m venv venv
+   source venv/bin/activate
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
 ### Backend (FastAPI)
 
-1. **Install dependencies**:
-   - Ensure you have Python 3.8+ installed.
-   - Install the required packages using the provided `requirements.txt` file:
-     ```bash
-     pip install -r requirements.txt
-     ```
-
-2. **Run the API server**:
+1. **Run the API server**:
    - Start the FastAPI server using Uvicorn:
      ```bash
      uvicorn api:app --host 0.0.0.0 --port 8000 --reload
@@ -45,17 +60,35 @@ This project is a **Company News Analyzer** that extracts, summarizes, and analy
 
 ### Frontend (Streamlit)
 
-1. **Install Streamlit** (if not already installed via `requirements.txt`):
+1. **Run the Streamlit app**:
    ```bash
-   pip install streamlit
+   streamlit run app.py
    ```
-
-2. **Run the Streamlit app**:
-   - Start the Streamlit application:
-     ```bash
-     streamlit run app.py
-     ```
    - The app will typically be available at `http://localhost:8501`.
+
+## Code Architecture
+
+### Modular Structure
+
+The project uses a modular architecture for better maintainability and scalability:
+
+```
+code/
+├── api.py             # FastAPI backend
+├── app.py             # Streamlit frontend
+├── requirements.txt
+└── utils/             # Modularized utility functions
+    ├── __init__.py    # Package exports and init functions
+    ├── news_extractor.py     # News extraction functionality
+    ├── sentiment_analyzer.py # Sentiment analysis components
+    ├── text_to_speech.py     # Translation and TTS functionality
+    └── analysis.py    # News analysis and processing
+```
+
+- **`news_extractor.py`**: Contains the `NewsExtractor` class for fetching and processing news articles using GoogleNews and newspaper3k.
+- **`sentiment_analyzer.py`**: Contains the `SentimentAnalyzer` class implementing NLTK VADER and transformers-based sentiment analysis.
+- **`text_to_speech.py`**: Contains the `TextToSpeechHindi` class for English-to-Hindi translation and audio generation.
+- **`analysis.py`**: Provides functions for comprehensive news analysis including sentiment comparison and topic extraction.
 
 ---
 
@@ -141,15 +174,24 @@ The backend is developed using **FastAPI** and exposes the following endpoints f
 
 ---
 
+## Deployment
+
+### Hugging Face Spaces Deployment
+
+This application is deployed on Hugging Face Spaces, a platform for hosting machine learning applications.
+
+#### Deployment URL
+- **Live Application**: [https://huggingface.co/spaces/toph1108/Company_news_analyzer](https://huggingface.co/spaces/toph1108/Company_news_analyzer)
+
+---
+
 ## Assumptions & Limitations
 
 ### Assumptions
 
 - **News Availability**: The project assumes that sufficient news articles (at least 3) are available for the specified company within the last 7 days via GoogleNews.
 
-
 ### Limitations
-
 
 - **Sentiment Analysis**:
   - The VADER model, while fast and effective for general text, is lexicon-based and may miss complex sentiments, sarcasm, or context-specific nuances.
@@ -160,3 +202,5 @@ The backend is developed using **FastAPI** and exposes the following endpoints f
 - **Rate Limiting**:
   - Frequent use of `GoogleNews` or `googletrans` may encounter rate limits imposed by Google, though no explicit API key-based restrictions are coded.
 
+- **Deployment Constraints**:
+  - The Hugging Face Spaces deployment may have performance limitations compared to local deployment, especially with resource-intensive operations like news extraction and translation.
