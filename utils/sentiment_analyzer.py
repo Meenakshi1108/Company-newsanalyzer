@@ -1,6 +1,5 @@
-"""
-Sentiment analysis module for processing news articles content.
-"""
+"""Sentiment analysis module for processing news articles content."""
+
 import logging
 import nltk
 from typing import Dict, Any, List
@@ -18,6 +17,7 @@ try:
 except Exception as e:
     logger.error(f"Error downloading NLTK resources: {e}")
 
+
 class SentimentAnalyzer:
     """Class for sentiment analysis and topic extraction."""
     
@@ -32,8 +32,7 @@ class SentimentAnalyzer:
             self.advanced_sentiment = None
     
     def analyze_sentiment(self, text: str) -> Dict[str, Any]:
-        """
-        Analyze the sentiment of a given text.
+        """Analyze the sentiment of a given text.
         
         Args:
             text: Text to analyze
@@ -60,8 +59,7 @@ class SentimentAnalyzer:
         }
     
     def extract_topics(self, keywords: List[str], text: str) -> List[str]:
-        """
-        Extract main topics from the article based on keywords and content.
+        """Extract main topics from the article based on keywords and content.
         
         Args:
             keywords: List of keywords from the article

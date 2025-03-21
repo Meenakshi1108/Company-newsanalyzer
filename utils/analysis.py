@@ -1,6 +1,5 @@
-"""
-Analysis functions for processing news articles and generating insights.
-"""
+"""Analysis functions for processing news articles and generating insights."""
+
 import logging
 from typing import List, Dict, Any
 
@@ -11,9 +10,9 @@ from .text_to_speech import TextToSpeechHindi
 # Set up logging
 logger = logging.getLogger(__name__)
 
+
 def get_company_news_with_sentiment(company_name: str) -> Dict[str, Any]:
-    """
-    Main function to get company news with sentiment analysis.
+    """Main function to get company news with sentiment analysis.
     
     Args:
         company_name: Name of the company to analyze
@@ -33,8 +32,10 @@ def get_company_news_with_sentiment(company_name: str) -> Dict[str, Any]:
         return {
             "company": company_name,
             "status": "error",
-            "message": (f"Could only find {len(articles)} articles. "
-                        f"Need at least 3 for meaningful analysis.")
+            "message": (
+                f"Could only find {len(articles)} articles. "
+                f"Need at least 3 for meaningful analysis."
+            )
         }
     
     # Process each article with sentiment and topics
@@ -84,8 +85,7 @@ def get_company_news_with_sentiment(company_name: str) -> Dict[str, Any]:
 
 
 def perform_comparative_analysis(articles: List[Dict]) -> Dict[str, Any]:
-    """
-    Perform comparative analysis across articles.
+    """Perform comparative analysis across articles.
     
     Args:
         articles: List of processed articles
@@ -110,7 +110,9 @@ def perform_comparative_analysis(articles: List[Dict]) -> Dict[str, Any]:
                 all_topics[topic] = 1
     
     # Find common and unique topics
-    common_topics = [topic for topic, count in all_topics.items() if count > 1]
+    common_topics = [
+        topic for topic, count in all_topics.items() if count > 1
+    ]
     
     # Prepare comparison insights based on sentiments and topics
     comparisons = []
@@ -121,16 +123,20 @@ def perform_comparative_analysis(articles: List[Dict]) -> Dict[str, Any]:
     
     if pos_count > neg_count:
         comparisons.append({
-            "Comparison": (f"Overall positive sentiment dominates with "
-                           f"{pos_count} positive articles vs "
-                           f"{neg_count} negative articles."),
+            "Comparison": (
+                f"Overall positive sentiment dominates with "
+                f"{pos_count} positive articles vs "
+                f"{neg_count} negative articles."
+            ),
             "Impact": "The company is currently receiving favorable media coverage."
         })
     elif neg_count > pos_count:
         comparisons.append({
-            "Comparison": (f"Overall negative sentiment dominates with "
-                           f"{neg_count} negative articles vs "
-                           f"{pos_count} positive articles."),
+            "Comparison": (
+                f"Overall negative sentiment dominates with "
+                f"{neg_count} negative articles vs "
+                f"{pos_count} positive articles."
+            ),
             "Impact": "The company is currently facing challenging media coverage."
         })
     else:
@@ -144,8 +150,10 @@ def perform_comparative_analysis(articles: List[Dict]) -> Dict[str, Any]:
         top_topic = max(all_topics.items(), key=lambda x: x[1])[0]
         comparisons.append({
             "Comparison": f"The dominant topic in coverage is '{top_topic}'.",
-            "Impact": (f"Media attention is currently focused on "
-                       f"the company's {top_topic.lower()} aspects.")
+            "Impact": (
+                f"Media attention is currently focused on "
+                f"the company's {top_topic.lower()} aspects."
+            )
         })
     
     # Create topic overlap analysis
@@ -159,7 +167,9 @@ def perform_comparative_analysis(articles: List[Dict]) -> Dict[str, Any]:
         
         unique_to_this_article = article_topics - other_articles_topics
         if unique_to_this_article:
-            unique_topics_by_article[article["title"]] = list(unique_to_this_article)
+            unique_topics_by_article[article["title"]] = list(
+                unique_to_this_article
+            )
     
     # Return the analysis
     return {
@@ -174,8 +184,7 @@ def perform_comparative_analysis(articles: List[Dict]) -> Dict[str, Any]:
 
 
 def get_final_sentiment(articles: List[Dict]) -> str:
-    """
-    Generate a final sentiment summary based on all articles.
+    """Generate a final sentiment summary based on all articles.
     
     Args:
         articles: List of processed articles
@@ -198,23 +207,28 @@ def get_final_sentiment(articles: List[Dict]) -> str:
     # Generate summary
     article_count = len(articles)
     if avg_score >= 0.25:
-        return (f"The company's news coverage is predominantly positive. "
-                f"{positive_count} out of {article_count} articles "
-                f"show positive sentiment.")
+        return (
+            f"The company's news coverage is predominantly positive. "
+            f"{positive_count} out of {article_count} articles "
+            f"show positive sentiment."
+        )
     elif avg_score <= -0.25:
-        return (f"The company's news coverage is predominantly negative. "
-                f"{negative_count} out of {article_count} articles "
-                f"show negative sentiment.")
+        return (
+            f"The company's news coverage is predominantly negative. "
+            f"{negative_count} out of {article_count} articles "
+            f"show negative sentiment."
+        )
     else:
-        return (f"The company's news coverage is mixed or neutral. "
-                f"The sentiment is balanced across {article_count} articles.")
+        return (
+            f"The company's news coverage is mixed or neutral. "
+            f"The sentiment is balanced across {article_count} articles."
+        )
 
 
 def generate_final_summary(
     company_name: str, articles: List[Dict], analysis: Dict
 ) -> str:
-    """
-    Generate a final summary for text-to-speech.
+    """Generate a final summary for text-to-speech.
     
     Args:
         company_name: Name of the company
@@ -229,7 +243,9 @@ def generate_final_summary(
     
     # Get top topics
     common_topics = analysis.get("topic_overlap", {}).get("common_topics", [])
-    topics_text = ", ".join(common_topics[:3]) if common_topics else "various topics"
+    topics_text = (
+        ", ".join(common_topics[:3]) if common_topics else "various topics"
+    )
     
     # Create summary
     summary = f"News summary for {company_name}. "
