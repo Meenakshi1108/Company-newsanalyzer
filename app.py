@@ -97,7 +97,6 @@ search_col, suggestion_col = st.columns([3, 1])
 with search_col:
     company_name = st.text_input(
         "Company name",
-        value="Microsoft",
         placeholder="Type company name here...",
         label_visibility="collapsed"
     )
